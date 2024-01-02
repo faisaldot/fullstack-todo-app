@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+const { createTodo, updateTodo } = require("./types");
+
+// Creating app
 const app = express();
 
 // Middlewares
@@ -14,8 +17,23 @@ app.use(
 );
 
 // Routes
-app.get("/", (req, res) => {
+app.post("/todos", (req, res) => {
+  const payload = createTodo.safeParse(req.body);
+  if (!payload.success) {
+    res.status(411).json({ error: "You send a wrong inputs ☹" });
+  }
+  return;
+});
+
+app.get("/todos", (req, res) => {
   res.send({ name: "Faisal Mahmud" });
+});
+
+app.put("/completed", (req, res) => {
+  const payload = updateTodo.safeParse(req.body);
+  if (!payload.success) {
+    res.status(411).json({ error: "You send wrong inputs ☹" });
+  }
 });
 
 module.exports = app;
