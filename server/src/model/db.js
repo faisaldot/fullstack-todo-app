@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-// const mongoURI = process.env.MONGODB_URI;
-const mongoURI =
-  "mongodb+srv://faisal:%40mmajan44927@cluster0.vghw5e9.mongodb.net/todoapp";
+const mongoURI = process.env.MONGODB_URI;
 
 mongoose.connect(mongoURI);
 const db = mongoose.connection;

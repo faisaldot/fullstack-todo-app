@@ -30,6 +30,7 @@ export default function TodoApp() {
         <label htmlFor="todo-input">What needs to be done?</label>
         <input
           id="todo-input"
+          value={nextTodo}
           onChange={(event) => setNextTodo(event.target.value)}
         />
       </form>
