@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const { createTodo, updateTodo } = require("./types");
+const todosRouter = require("./routes/todos.router");
+const completedRouter = require("./routes/completed.router");
+//--
+// const { updateTodoSchema, createTodoSchema } = require("./types");
+// const todoData = require("./model/db");
 
 // Creating app
 const app = express();
@@ -17,23 +21,7 @@ app.use(
 );
 
 // Routes
-app.post("/todos", (req, res) => {
-  const payload = createTodo.safeParse(req.body);
-  if (!payload.success) {
-    res.status(411).json({ error: "You send a wrong inputs ☹" });
-  }
-  return;
-});
-
-app.get("/todos", (req, res) => {
-  res.send({ name: "Faisal Mahmud" });
-});
-
-app.put("/completed", (req, res) => {
-  const payload = updateTodo.safeParse(req.body);
-  if (!payload.success) {
-    res.status(411).json({ error: "You send wrong inputs ☹" });
-  }
-});
+app.use("/todos", todosRouter);
+app.use("/completed", completedRouter);
 
 module.exports = app;
