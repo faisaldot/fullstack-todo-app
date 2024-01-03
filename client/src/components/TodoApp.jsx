@@ -1,19 +1,40 @@
+import { useState } from "react";
 import TodoItem from "./TodoItem";
 
+const initialState = [
+  { id: 1, title: "Going to field" },
+  { id: 2, title: "Buy some fruits" },
+];
+
 export default function TodoApp() {
-  const initialTodo = [
-    { id: 1, title: "Going to field" },
-    { id: 2, title: "Buy some fruits" },
-  ];
+  const [todos, setTodos] = useState(initialState);
+  const [nextTodo, setNextTodo] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    setTodos([
+      ...todos,
+      {
+        id: crypto.randomUUID(),
+        title: nextTodo,
+      },
+    ]);
+    setNextTodo("");
+  }
+
   return (
     <main>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>⏭ List your next todo</h2>
         <label htmlFor="todo-input">What needs to be done?</label>
-        <input id="todo-input" />
+        <input
+          id="todo-input"
+          onChange={(event) => setNextTodo(event.target.value)}
+        />
       </form>
       <ol>
-        {initialTodo.map((item) => (
+        {todos.map((item) => (
           <TodoItem key={item.id} item={item} />
         ))}
       </ol>

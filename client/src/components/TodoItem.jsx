@@ -3,7 +3,7 @@ export default function TodoItem({ item }) {
     <>
       <li>
         <input type="checkbox" id={item.id} />
-        <label htmlFor="todo-1">{item.title}</label>
+        <label htmlFor={item.id}>{item.title}</label>
       </li>
     </>
   );
